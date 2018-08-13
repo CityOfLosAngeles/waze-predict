@@ -7,3 +7,8 @@ Predictive modeling for City of LA's waze data
 
 Usage: `python road_squares.py`
 
+###
+
+`pull_data.py`: pulls data from the database into usable csvs (into `data/jams.csv`, specifically).
+
+Usage: `python pull_data.py user password database -H host -p port`
