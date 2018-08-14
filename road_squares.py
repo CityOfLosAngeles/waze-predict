@@ -34,7 +34,7 @@ my_floor = lambda x: floor(x*ratio)/ratio
 streets = dict()
 base_streets = []
 
-db = pd.read_csv("la_streets.csv")
+db = pd.read_csv("data/la_streets.csv")
 l = len(db['path'])
 
 def increment(square):
