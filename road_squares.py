@@ -156,24 +156,28 @@ def handle_row(r):
 
 
 print("Phase 1. Bucketing data.")
+"""
 wilshire = db['street'].str.contains("Wilshire",na=False)
 vermont = db['street'].str.contains("Vermont",na=False)
 section = db[vermont].append(db[wilshire])
+"""
 for i,r in db.iterrows():
     if i%5000 == 0:
         print("{} of {}".format(i,l))
     to_examine = 100
-    handle_row(r)
-    """
-    if i==to_examine:
+    t = r['type']
+    if (t != "Pedestrian Walkway" and 
+            t != "Unpaved Road" and
+            t != "Alley" and
+            t != "Railroad" and
+            t != "Bike Path" and
+            t != "Private Road" and
+            t != "Driveway" and
+            t != "Trail" and
+            t != "Planned Road"):
         handle_row(r)
-    """
 
 print("Phase 2. Generating file.")
-geojson = {}
-geojson['type'] = "FeatureCollection"
-features = []
-diff = 1/ratio
 i = 0
 l = len(streets.keys())
 csv_df = {"coordinates" : [], "streets": [], "type": [], "intersection": []}
@@ -191,6 +195,9 @@ for k,v in streets.items():
 pd.DataFrame(csv_df).to_csv("data/street_grid.csv",index=False)
    
 """
+geojson = {}
+geojson['type'] = "FeatureCollection"
+features = []
 for k,v in streets.items():
     if i%50000 == 0:
         print("{} of {}".format(i,l))
