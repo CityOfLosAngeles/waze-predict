@@ -29,12 +29,13 @@ host = "localhost"
 if args.host is not None:
     host = args.host
 port = 5432
-if args.port is not one:
+if args.port is not None:
     port = args.port
 con = connect(user,password,db,host,port)
 
 limit = 1000
 
+##### CHANGE THIS LINE TO CHANGE WHICH DATA TO PULL FROM ###########
 jams_db = pandas.read_sql("SELECT * FROM waze2.jams ORDER BY pub_millis,street;".
         format(limit),con,index_col=None)
 
