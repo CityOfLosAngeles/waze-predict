@@ -31,6 +31,6 @@ I started working on the model in `training_model.ipynb`. It is a work in progre
 
 Regardless, the data has been processed to be used. I set it up as a binary classifier: each square either has traffic or it doesn't. I included the location, the weather, the time of day, the day of the week, and whether there is traffic immediately proceeding it on an adjacent square (or that square itself).
 
-Aside from changing the hyperparameters, the most obvious way to fix it is to change training and test data selection from totally random to stratified. 
+Aside from changing the hyperparameters, the most obvious way to fix it is to generate training and test data in a much more intelligent way. Right now, selection is totally random. It should be, at the very least, stratified.
 
-Anyways, turns out traffic prediction is difficult. This is a work in progress.
+Anyways, turns out traffic prediction is difficult.
