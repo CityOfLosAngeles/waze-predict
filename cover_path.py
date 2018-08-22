@@ -35,6 +35,36 @@ def increment(square):
     y_1 = (square[1]*ratio+1)/ratio
     return ((x_0,x_1),(y_0,y_1))
 
+def get_adj(square):
+    squares = set()
+    x_new = round((square[0]*ratio-1)/ratio, digits)
+    y_new = square[1]
+    squares.add((x_new,y_new))
+    x_new = round((square[0]*ratio+1)/ratio, digits)
+    y_new = square[1]
+    squares.add((x_new,y_new))
+    x_new = square[0]
+    y_new = round((square[1]*ratio-1)/ratio,digits)
+    squares.add((x_new,y_new))
+    x_new = square[0]
+    y_new = round((square[1]*ratio+1)/ratio,digits)
+    squares.add((x_new,y_new))
+    # diagonal
+    x_new = round((square[0]*ratio-1)/ratio, digits)
+    y_new = round((square[1]*ratio-1)/ratio,digits)
+    squares.add((x_new,y_new))
+    x_new = round((square[0]*ratio+1)/ratio, digits)
+    y_new = round((square[1]*ratio+1)/ratio,digits)
+    squares.add((x_new,y_new))
+    x_new = round((square[0]*ratio-1)/ratio, digits)
+    y_new = round((square[1]*ratio+1)/ratio,digits)
+    squares.add((x_new,y_new))
+    x_new = round((square[0]*ratio+1)/ratio, digits)
+    y_new = round((square[1]*ratio-1)/ratio,digits)
+    squares.add((x_new,y_new))
+    return squares
+
+
 def check_border(point, square):
     total_square = increment(square)
     x = total_square[0]
