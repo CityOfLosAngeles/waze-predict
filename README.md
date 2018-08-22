@@ -5,15 +5,11 @@ First download local climatological data at https://www.ncdc.noaa.gov/cdo-web/da
 
 Save it as `weather_data.csv` in the data folder.
 
-Then run `road_squares.py`. It uses `la_streets.csv` to generate a grid covering all streets in LA County in  `data/`. This grid is used as the base to generate training data or to bucket the data.
+Then run `road_squares.py` (`python road_squares.py`). It uses `la_streets.csv` to generate a grid covering all streets in LA County in  `data/`. This grid is used as the base to generate training data or to bucket the data.
 
 Note the code that actually turns a path (aka geojson linestring) into a set of polygons is in `cover_path.py`. This also contains options that can be used to configure grid generation.
 
-Usage: `python road_squares.py`
-
-Next, use `pull_data.py` to pull data from the database into usable csvs (into `data/jams.csv`, specifically).
-
-Usage: `python pull_data.py user password database -H host -p port`
+Next, use `pull_data.py` to pull data from the database into usable csvs (into `data/jams.csv`, specifically). To run it, use `python pull_data.py user password database -H host -p port`. 
 
 Currently, it pulls from `jams2`, which is only a small subset of the entire table. This can be changed very easily in the source code. 
 
@@ -29,3 +25,12 @@ Finally, use `geojsons/make_html.ipynb` to create html visualizations of the fil
 
 The darker the color, the more incidents were reported. We can see that the 405 near Pico was jammed on 6 different occasions on weekdays at 2 pm. In the future I would like to combine these seperate files into one html that allows us to slide between different times to see traffic conditions change. 
 
+-------------
+
+I started working on the model in `training_model.ipynb`. It is a work in progress. Most of the time, there is no traffic. This means the model does not ever predict traffic. The model will have to be modified to work on extremely sparse data.
+
+Regardless, the data has been processed to be used. I set it up as a binary classifier: each square either has traffic or it doesn't. I included the location, the weather, the time of day, the day of the week, and whether there is traffic immediately proceeding it on an adjacent square (or that square itself).
+
+Aside from changing the hyperparameters, the most obvious way to fix it is to change training and test data selection from totally random to stratified. 
+
+Anyways, turns out traffic prediction is difficult. This is a work in progress.
